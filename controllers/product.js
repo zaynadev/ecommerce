@@ -21,3 +21,11 @@ exports.createProduct = (req, res) => {
     })
     
 }
+
+exports.getProduct = (req, res) => {
+    req.product.photo = undefined;
+    res.json({
+        product: req.product
+    });
+
+}
