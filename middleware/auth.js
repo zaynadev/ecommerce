@@ -10,8 +10,7 @@ exports.requireAuth = expressjwt({
 
 exports.isAuth = (req, res, next) => {
     if(req.auth.role == 1) return next();
-    let user = req.profile && req.auth._id == req.profile._id;
-    if(!user) res.status(403).json({error: "Access denied!"});
+    if(!req.auth._id) res.status(403).json({error: "Access denied!"});
     next();
 }
 
