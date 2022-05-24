@@ -1,11 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require("mongoose");
+const expressValidator = require('express-validator');
 const userRoutes = require('./routes/users')
 
 
 const app = express();
 
+app.use(express.json());
+app.use(expressValidator());
 app.use('/users', userRoutes);
 
 mongoose.connect(process.env.DATABASE, {})
