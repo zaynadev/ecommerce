@@ -1,7 +1,12 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require("mongoose");
+const userRoutes = require('./routes/users')
+
+
 const app = express();
+
+app.use('/users', userRoutes);
 
 mongoose.connect(process.env.DATABASE, {})
     .then(() => {
@@ -11,10 +16,6 @@ mongoose.connect(process.env.DATABASE, {})
         console.log('error connecting db')
     });
 
-
-app.get('/', (req, res) => {
-    res.send('Hello world !!!')
-})
 
 const port = process.env.PORT || 3003;
 app.listen(port, () => {
