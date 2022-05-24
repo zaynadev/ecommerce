@@ -1,4 +1,4 @@
- const User = require('./../models/user');
+ const User = require('../models/user');
  const jwt = require('jsonwebtoken');
  
  exports.users = (req, res) => {
@@ -23,7 +23,7 @@ exports.signin = (req, res) => {
         if(!user.authenticate(password))
             return res.status(401).send({error: "Invalid email or password!"});
 
-        const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET);
+        const token = jwt.sign({_id: user._id, role: user.role}, process.env.JWT_SECRET);
         const {_id, name, email, role} = user;
         res.cookie('token', token, {
             expire: new Date() + 86400000

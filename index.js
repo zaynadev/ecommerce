@@ -3,7 +3,8 @@ const express = require('express');
 const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
-const userRoutes = require('./routes/users')
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 
 const app = express();
@@ -11,7 +12,8 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(expressValidator());
-app.use('/users', userRoutes);
+app.use('/', authRoutes);
+app.use('/', userRoutes);
 
 mongoose.connect(process.env.DATABASE, {})
     .then(() => {
