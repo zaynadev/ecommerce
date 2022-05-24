@@ -3,11 +3,10 @@ const mongoose = require('mongoose');
 const categorySchema = new mongoose.Schema({
     name: {
         type: String,
-        trim: true,
-        maxlength: 50,
-        required: true
-    },
-}, { timestamps: true });
+        require: true,
+        maxLength: 32,
+        trim: true
+    }
+}, {timestamps: true});
 
-
-module.exports = mongoose.model('Catgory', categorySchema);
+module.exports = mongoose.model('Category', categorySchema);

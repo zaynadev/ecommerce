@@ -40,12 +40,6 @@ exports.createProduct = (req, res) => {
     
 }
 
-exports.getProduct = (req, res) => {
-    req.product.photo = undefined;
-    res.json({
-        product: req.product
-    });
-}
 
 exports.editProduct = (req, res) => {
     let form = new formidable.IncomingForm();
@@ -86,4 +80,29 @@ exports.deleteProduct = (req, res) => {
         if(err) return res.status(404).json({message: "Product not found!"})
         res.status(204).json({});
     });
+}
+
+exports.getProduct = (req, res) => {
+    req.product.photo = undefined;
+    res.json({
+        product: req.product
+    });
+}
+
+
+exports.getProducts = (req, res) => {
+    let sortBy = req.query.sortBy ? req.query.sortBy : '_id';
+    let order = req.query.order ? req.query.order : 'asc';
+    let limit = req.query.limit ? +req.query.limit : 10;
+    Product
+        .find()
+        .select("-photo")
+        .populate("category")
+        .sort([[sortBy, order]])
+        .limit(limit)
+        .exec((err, prodcuts) => {
+            if(err) return res.status(404).json({message: "Products not found!"});
+            res.json(prodcuts);
+        })
+        ;
 }
