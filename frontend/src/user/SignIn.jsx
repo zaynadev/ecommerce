@@ -1,8 +1,13 @@
 import React from 'react'
+import Layout from '../core/Layout'
 
 function SignIn() {
   return (
-    <div><h1>SignIn</h1></div>
+    <div>
+       <Layout title='Sign In' description='Sign ip ecommerce app' className='container'>
+        <h2>Hello from signip page</h2>
+       </Layout>
+    </div>
   )
 }
 

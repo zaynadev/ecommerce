@@ -9,7 +9,9 @@ exports.signup = (req, res) => {
     const user = new User(req.body);
     user.save((err, user) => {
         if(err) return res.status(400).send(err);
-        res.send(user);
+        user.hashed_password = undefined;
+        user.salt = undefined;
+        res.json(user);
     });
     
 }
@@ -28,7 +30,7 @@ exports.signin = (req, res) => {
         res.cookie('token', token, {
             expire: new Date() + 86400000
         });
-        res.send({
+        res.json({
             token,
             user: {_id, name, email, role}
         })

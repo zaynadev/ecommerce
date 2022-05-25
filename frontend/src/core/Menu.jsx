@@ -12,7 +12,7 @@ function Menu(props) {
 
   return (
     <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
             <button
             className="navbar-toggler"
@@ -31,14 +31,17 @@ function Menu(props) {
                 <li className="nav-item">
                     <Link className={`nav-link ${isActive("/") ? 'active': ''}`} aria-current="page" to="/">Home</Link>
                 </li>
-                <li className="nav-item">
-                    <Link className={`nav-link ${isActive("/signin") ? 'active': ''}`} to="/signin">signIn</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className={`nav-link ${isActive("/signup") ? 'active': ''}`} to="/signup">signUp</Link>
-                </li>
             </ul>
             
+            <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                    <Link className={`nav-link ${isActive("/signin") ? 'active': ''}`} to="/signin">connexion</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className={`nav-link ${isActive("/signup") ? 'active': ''}`} to="/signup">register</Link>
+                </li>
+            </ul>
+
             </div>
         </div>
         </nav>

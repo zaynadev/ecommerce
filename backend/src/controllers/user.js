@@ -1,8 +1,8 @@
 
 
 exports.getOneUser = (req, res) => {
-    delete(req.profile.hashed_password);
-    delete(req.profile.salt);
+    user.hashed_password = undefined;
+    user.salt = undefined;
     res.json({
         user: req.profile
     })
@@ -15,8 +15,8 @@ exports.editOneUser = (req, res) => {
             return res.status(400).json({err})
         }
         
-        delete(req.profile.hashed_password);
-        delete(req.profile.salt);
+        user.hashed_password = undefined;
+        user.salt = undefined;
 
         res.json({user})
 
