@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { API_URL } from '../config'
 import toastr from 'toastr'
 import "toastr/build/toastr.css"
+import { isAuthenticated } from '../helpers';
 
 function Menu() {
     const location = useLocation();
@@ -64,15 +65,20 @@ function Menu() {
                 <li className="nav-item">
                     <Link className={`nav-link ${isActive("/") ? 'active': ''}`} aria-current="page" to="/">Home</Link>
                 </li>
+                <li className="nav-item">
+                    <Link className={`nav-link ${isActive("/dashboard") ? 'active': ''}`} aria-current="page" to="/dashboard">Dashbord</Link>
+                </li>
             </ul>
             
             <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
                 
                 {
-                    localStorage.getItem('token') ? 
-                    <li className="nav-item" onClick={signout}>
-                        <span style={{cursor: 'pointer'}} className={`nav-link`} >logout</span>
-                     </li>
+                    isAuthenticated() ? 
+                    <>
+                        <li className="nav-item" onClick={signout}>
+                            <span style={{cursor: 'pointer'}} className={`nav-link`} >logout</span>
+                        </li>
+                    </>
                     :
                    <>
                     <li className="nav-item">
