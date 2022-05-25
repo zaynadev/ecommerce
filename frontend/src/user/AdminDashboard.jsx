@@ -4,7 +4,7 @@ import Layout from '../core/Layout'
 import { currentUser } from '../helpers';
 
 
-function Dashboard() {
+function AdminDashboard() {
   const {name, email, role} = currentUser();
 
   return (
@@ -19,10 +19,10 @@ function Dashboard() {
                 <h5 className="card-title">User links</h5>
                 <ul className='list-group list-group-flush'>
                   <li className='list-group-item'>
-                    <Link className='nav-link' to='/cart'>Cart</Link>
+                    <Link className='nav-link' to='/category/create'>Create category</Link>
                   </li>
                   <li className='list-group-item'>
-                    <Link className='nav-link' to='/cart'>Profile</Link>
+                    <Link className='nav-link' to='/product/create'>Create product</Link>
                   </li>
                   
                 </ul>
@@ -42,14 +42,7 @@ function Dashboard() {
                 </ul>
               </div>
             </div>
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">Purshase history</h5>
-                <ul className='list-group list-group-flush'>
-                  <li className='list-group-item'>History</li>
-                </ul>
-              </div>
-            </div>
+            
         
           </div>
          
@@ -60,4 +53,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default AdminDashboard
