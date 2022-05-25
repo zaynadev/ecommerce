@@ -32,7 +32,7 @@ function SignUp() {
     .then(response => response.json())
     .then(response => {
       if(response.errors){
-        toastr.error(response.errors[0].msg, "Error",{
+        toastr.warning(response.errors[0].msg, "Error",{
           positionClass: 'toast-bottom-left'
         })
       }else{
@@ -43,7 +43,9 @@ function SignUp() {
         navigate('/signin');
       }
     })
-    .catch(err => console.log(`sign up error => `, err));
+    .catch(err =>  toastr.error("Please try again!", "Error",{
+      positionClass: 'toast-bottom-left'
+    }));
   }
 
   const form = () => (

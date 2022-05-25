@@ -1,13 +1,46 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { API_URL } from '../config'
+import toastr from 'toastr'
+import "toastr/build/toastr.css"
 
-function Menu(props) {
+function Menu() {
     const location = useLocation();
-   
+    const navigate = useNavigate();
+
     const isActive = (path) => {
         let active = false;
         location.pathname === path ? active=true :  active=false;
         return active;
+    }
+
+    const signout = () => {
+        fetch(`${API_URL}/signout`, {
+            method: "POST",
+            headers:{
+              "Accept": "application/json",
+              'Content-Type': 'application/json'
+            },
+          })
+          .then(response => response.json())
+          .then(response => {
+              if(response.done){
+                toastr.info("Success logout!", "Logout",{
+                    positionClass: 'toast-bottom-left'
+                  })
+                  localStorage.removeItem('token');
+                  localStorage.removeItem('user');
+                  navigate('/signin');
+              }else{
+                toastr.error("Please try again!", "Error",{
+                    positionClass: 'toast-bottom-left'
+                  })
+              }
+            
+          })
+          .catch(err =>  toastr.error("Please try again!", "Error",{
+            positionClass: 'toast-bottom-left'
+          }));
     }
 
   return (
@@ -34,12 +67,23 @@ function Menu(props) {
             </ul>
             
             <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
-                <li className="nav-item">
-                    <Link className={`nav-link ${isActive("/signin") ? 'active': ''}`} to="/signin">connexion</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className={`nav-link ${isActive("/signup") ? 'active': ''}`} to="/signup">register</Link>
-                </li>
+                
+                {
+                    localStorage.getItem('token') ? 
+                    <li className="nav-item" onClick={signout}>
+                        <span style={{cursor: 'pointer'}} className={`nav-link`} >logout</span>
+                     </li>
+                    :
+                   <>
+                    <li className="nav-item">
+                        <Link className={`nav-link ${isActive("/signin") ? 'active': ''}`} to="/signin">connexion</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link className={`nav-link ${isActive("/signup") ? 'active': ''}`} to="/signup">register</Link>
+                    </li>
+                   </>
+                }
+               
             </ul>
 
             </div>
