@@ -66,6 +66,9 @@ function Menu() {
                     <Link className={`nav-link ${isActive("/") ? 'active': ''}`} aria-current="page" to="/">Home</Link>
                 </li>
                 <li className="nav-item">
+                    <Link className={`nav-link ${isActive("/shop") ? 'active': ''}`} aria-current="page" to="/">Shop</Link>
+                </li>
+                <li className="nav-item">
                     <Link className={`nav-link ${isActive("/dashboard") ? 'active': ''}`} aria-current="page" to="/dashboard">Dashbord</Link>
                 </li>
             </ul>

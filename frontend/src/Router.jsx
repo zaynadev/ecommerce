@@ -9,6 +9,7 @@ import { currentUser, isAdmin, isAuthenticated } from './helpers';
 import AdminDashboard from './user/AdminDashboard';
 import AddCategory from './admin/AddCategory';
 import AddProduct from './admin/AddProduct';
+import Shop from './core/Shop';
 
 const PrivateWrapper = () => {
   return isAuthenticated() ? <Outlet /> : <Navigate to="/signin" />;
@@ -26,6 +27,7 @@ function Router() {
         <Routes>
             <Route element={<PrivateWrapper />}>
               <Route path='/' exact element={<Home />} />
+              <Route path='/shop' exact element={<Shop />} />
               <Route path='/dashboard' exact element={isAdmin() ? <AdminDashboard /> : <Dashboard />} />
               <Route path='category' element={<AdminWrapper />}>
                 <Route path='create' exact element={<AddCategory />} />
